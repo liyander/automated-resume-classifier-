@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .match {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            background-color: #fffde7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+    <h2>Resume Analysis Results</h2>
+    {% for analysis in analyses %}
+    <div class="analysis-section mb-5">
+    <h3>Resume {{ loop.index }} Analysis</h3>
+    
+    <div class="section">
+        <div class="section-title">Recommendation:</div>
+        <div class="match">{{ analysis.suitability }}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">Recommendation Reason:</div>
+        <div class="match">{{ analysis.recommendation_reason }}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">Key Entities Found:</div>
+        <div class="match">
+            {% for entity in analysis.entities %}
+                <span class="highlight">{{ entity[0] }}</span> ({{ entity[1] }})<br>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">Skill Match Percentage:</div>
+        <div class="match">{{ analysis.skill_match_percentage }}%</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">Additional Qualifications:</div>
+        <div class="match">{{ analysis.additional_qualifications }}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">Projects Analysis:</div>
+        <div class="match">{{ analysis.projects_analysis }}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">AI Analysis:</div>
+        <div class="match">{{ analysis.gemini_analysis }}</div>
+    </div>
+    
+    <hr>
+    </div>
+    {% endfor %}
+    <button onclick="window.location.href='/'">Upload Another Resume</button>
+</div>
+</body>
+</html>
